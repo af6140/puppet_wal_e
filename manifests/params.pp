@@ -1,0 +1,37 @@
+class wal_e::params {
+  $install_method = 'pip'
+  $repository_url = 'https://github.com/wal-e/wal-e.git'
+  $version = '0.7.0'
+  $git_version = "v${version}"
+  $env_dir = '/etc/wal-e'
+  $base_backup_disabled = false
+  $base_backup_minute = 0
+  $base_backup_hour = 0
+  $base_backup_day = '*'
+  $base_backup_month = '*'
+  $base_backup_weekday = '1'
+  $base_backup_options = undef
+
+  $user = 'postgres'
+  $group = 'postgres'
+  $pip_user = 'root'
+  $pgdata_dir = '/var/lib/pgsql/data'
+
+  $packages  = [
+    'libevent-devel',
+    'libxslt-devel',
+    'lzop',
+    'postgresql-dev',
+    'python-dev',
+    'python-setuptools',
+    'git',
+  ]
+
+  $pips = [
+    'argparse',
+    'boto',
+    'gevent'
+  ]
+
+  $storage_type = 'aws'
+}
