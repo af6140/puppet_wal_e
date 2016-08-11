@@ -39,7 +39,7 @@ class wal_e::install{
       }
       exec {'wal_e_install_src':
         cwd => $src_install_dir,
-        cmd => '/usr/bin/python .setup.py install',
+        command => '/usr/bin/python .setup.py install',
         refreshonly => true,
         subscribe => Vcsrepo[$src_install_dir],
       }
