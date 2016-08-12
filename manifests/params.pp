@@ -1,7 +1,7 @@
 class wal_e::params {
   $install_method = 'pip'
   $repository_url = 'https://github.com/wal-e/wal-e.git'
-  $version = '0.7.0'
+  $version = '0.9.2'
   $git_version = "v${version}"
   $env_dir = '/etc/wal-e'
   $base_backup_disabled = false
@@ -18,12 +18,16 @@ class wal_e::params {
   $pgdata_dir = '/var/lib/pgsql/data'
 
   $packages  = [
+    'gcc',
+    'make',
     'libevent-devel',
     'libxslt-devel',
     'lzop',
-    'postgresql-dev',
-    'python-dev',
+    'postgresql',
+    'postgresql-devel',
+    'python-devel',
     'python-setuptools',
+    'python-pip',
     'git',
   ]
 

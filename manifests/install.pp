@@ -1,11 +1,12 @@
 class wal_e::install{
 
+
   file {$wal_e::env_dir:
     ensure => 'directory',
     owner => $wal_e::user,
     group => $wal_e::group,
     mode => '0550',
-  } ->
+  }->
   file {"$wal_e::env_dir/env":
     ensure => 'directory',
     owner => $wal_e::user,
@@ -14,16 +15,11 @@ class wal_e::install{
     recurse => true,
     purge => true,
   }
-  package {$wal_e::packages:
-    ensure => 'present'
-  }
-  package {$wal_e::pips:
-    ensure => 'present',
-    provider => 'pip',
-  }
 
   case $wal_e::install_method {
     'pip': {
+      class {'wal_e::packages':
+      } ->
       package {'wal-e':
         ensure => $wal_e::version,
         provider => 'pip',
@@ -31,6 +27,8 @@ class wal_e::install{
     }
     'source': {
       $src_install_dir = "${::wal_e::env_dir}/.src"
+      class {'wal_e::packages':
+      } ->
       vcsrepo { $src_install_dir:
         ensure => 'present',
         provider => 'git',
@@ -44,10 +42,17 @@ class wal_e::install{
         subscribe => Vcsrepo[$src_install_dir],
       }
     }
+    'package': {
+      package {'python-wal-e':
+        ensure => 'present',
+      }
+    }
   }
 
   #base backup cmd
   file { "/usr/local/bin/base_backup.sh":
+    ensure => 'present',
     content => "/usr/bin/envdir ${::wal_e::env_dir} wal-e backup-push ${::wal_e::pgdata_dir}"
+    mode => '0754'
   }
 }
