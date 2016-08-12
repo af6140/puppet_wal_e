@@ -12,7 +12,8 @@ describe 'wale' do
          storage_configs => {
            'aws_access_key' => 'dummy',
            'aws_secret_key' => 'dummy',
-           's3_prefix' => 's3://dummy'
+           's3_prefix' => 's3://dummy',
+           'aws_region' => 'us-east-1'
          }
        }
       EOS
