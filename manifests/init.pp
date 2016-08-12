@@ -19,6 +19,14 @@ class wal_e (
   $storage_configs = undef
 ) inherits wal_e::params {
 
+  validate_absolute_path($env_dir)
+  validate_string($storage_type)
+  validate_re($storage_type, ['aws','google','azure','swift'])
+  validate_string($install_method)
+  validate_re($install_method, ['source', 'pip', 'package'])
+  validate_hash($storage_configs)
+  validate_absolute_path($pgdata_dir)
+
   class {'::wal_e::install':
   } ->
   class {'::wal_e::config':
