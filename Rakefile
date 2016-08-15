@@ -43,3 +43,19 @@ task :test => [
   :lint,
   :spec,
 ]
+
+SPEC_SUITES = [
+   { :id => :default, :title => 'default acceptance test', :pattern => %w(spec/acceptance/wal_e_spec.rb) },
+   { :id => 'ubuntu14', :title => "bamboo server", :pattern => ["spec/acceptance/wal_e_spec.rb"], :set => "ubuntu14" },
+]
+
+namespace :acceptance do
+    SPEC_SUITES.each do |suite|
+      desc "Run all specs in #{suite[:title]} spec suite"
+      RSpec::Core::RakeTask.new(suite[:id]) do |t|
+        ENV["BEAKER_set"] = suite[:set] || 'default'
+        t.rspec_opts = ['--options', "\".rspec\""]
+        t.pattern= suite[:pattern]
+      end
+    end
+end

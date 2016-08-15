@@ -1,0 +1,17 @@
+HOSTS:
+  ubuntu-14:
+    roles:
+      - agent
+      - centos
+    platform: ubuntu-14.04-amd64
+    image: ubuntu-upstart:14.04
+    hypervisor: docker
+    docker_cmd: ['/sbin/init']
+    docker_container_name: wal_e_ubuntu14
+    docker_image_commands:
+       - "sed --in-place=.bak 's/without-password/yes/' /etc/ssh/sshd_config"
+CONFIG:
+  trace_limit: 200
+CONFIG:
+  log_level: verbose
+  type: foss

@@ -25,6 +25,14 @@ hosts.each do |host|
       end
       on host, 'wget --no-check-certificate https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -O /tmp/epel-release-latest-7.noarch.rpm'
       on host, 'rpm -ivh /tmp/epel-release-latest-7.noarch.rpm', { :acceptable_exit_codes => [0,1] }
+  when 'Debian'
+    case $operatingsystemmajrelease
+    when '14'
+      %w(bizip2 tar git).each do |pkg_to_install|
+        install_package(host, pkg_to_install)
+      end
+
+    end
   end
  end
 end

@@ -1,20 +1,18 @@
 class wal_e::packages(
-    $os_packges = $wal_e::packages,
+    $os_packages = $wal_e::packages,
     $pip_packages = $wal_e::pips
 ) {
 
-  if $os_packges {
-    ensure_resource('package', $os_packges, {'ensure' => 'present'})
-
+  if $os_packages {
+    ensure_resource('package', $os_packages, {'ensure' => 'present'})
   }
   if $pip_packages {
-    ensure_resource('package', $pip_packages, {'ensure' => 'present', 'provider' => 'pip', 'require' => [Package['python-pip'], Package['python-devel'], Package['postgresql'], Package['postgresql-devel']]})
-      # package {$wal_e::pips:
-      #   ensure => 'present',
-      #   provider => 'pip',
-      #   require => Package['python-pip'],
-      # }
-      #
+
+    ensure_resource('package', $pip_packages, {'ensure' => 'present', 'provider' => 'pip'})
+  }
+
+  if $os_packages and $pip_packages {
+    Package[$os_packages] -> Package[$pip_packages]
   }
 
 }

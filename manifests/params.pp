@@ -17,19 +17,38 @@ class wal_e::params {
   $pip_user = 'root'
   $pgdata_dir = '/var/lib/pgsql/data'
 
-  $packages  = [
-    'gcc',
-    'make',
-    'libevent-devel',
-    'libxslt-devel',
-    'lzop',
-    'postgresql',
-    'postgresql-devel',
-    'python-devel',
-    'python-setuptools',
-    'python-pip',
-    'git',
-  ]
+  case $::osfamily {
+    'RedHat': {
+      $packages  = [
+        'gcc',
+        'make',
+        'libevent-devel',
+        'libxslt-devel',
+        'lzop',
+        'postgresql',
+        'postgresql-devel',
+        'python-devel',
+        'python-setuptools',
+        'python-pip',
+        'git',
+      ]
+    }
+    'Debian': {
+      $packages = [
+        'build-essential',
+        'libevent-dev',
+        'libxslt1-dev',
+        'lzop',
+        'libpq-dev',
+        'python-dev',
+        'python-pip',
+        'git'
+      ]
+    }
+    default: {
+
+    }
+  }
 
   $pips = [
     'argparse',
