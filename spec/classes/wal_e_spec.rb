@@ -15,6 +15,9 @@ describe 'wal_e' do
             }
           }
         }
+        let(:facts) do
+          facts
+        end
         it { should compile.with_all_deps }
         it { should contain_class('wal_e')}
         it { should contain_class('wal_e::config')}
@@ -37,6 +40,9 @@ describe 'wal_e' do
             :install_method => 'source'
           }
         }
+        let(:facts) do
+          facts
+        end
         it { should compile.with_all_deps }
         it { should contain_class('wal_e')}
         it { should contain_class('wal_e::config')}
@@ -61,6 +67,9 @@ describe 'wal_e' do
             :install_method => 'source'
           }
         }
+        let(:facts) do
+          facts
+        end
         it { should compile.with_all_deps }
         it { should contain_class('wal_e')}
         it { should contain_class('wal_e::config')}
@@ -84,6 +93,9 @@ describe 'wal_e' do
             :install_method => 'source'
           }
         }
+        let(:facts) do
+          facts
+        end
         it { should compile.with_all_deps }
         it { should contain_class('wal_e')}
         it { should contain_class('wal_e::config')}
@@ -111,6 +123,9 @@ describe 'wal_e' do
             :install_method => 'source'
           }
         }
+        let(:facts) do
+          facts
+        end
         it { should compile.with_all_deps }
         it { should contain_class('wal_e')}
         it { should contain_class('wal_e::config')}
