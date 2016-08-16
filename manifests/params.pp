@@ -17,6 +17,8 @@ class wal_e::params {
   $pip_user = 'root'
   $pgdata_dir = '/var/lib/pgsql/data'
 
+  $storage_type = 'aws'
+
   case $::osfamily {
     'RedHat': {
       $packages  = [
@@ -51,10 +53,13 @@ class wal_e::params {
   }
 
   $pips = [
-    'argparse',
     'boto',
-    'gevent'
+    'gevent',
+    'azure',
+    'gcloud',
+    'python-swiftclient',
+    'python-keystoneclient'
   ]
 
-  $storage_type = 'aws'
+
 }

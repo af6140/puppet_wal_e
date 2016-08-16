@@ -52,7 +52,16 @@ class wal_e::install{
   #base backup cmd
   file { "${wal_e::env_dir}/base_backup.sh":
     ensure => 'present',
-    content => "/usr/bin/envdir ${::wal_e::env_dir} wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}",
+    content => "envdir ${::wal_e::env_dir} wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}",
+    mode => '0754',
+    owner => $::wal_e::user,
+    group => $::wal_e::group,
+    require => File[$wal_e::env_dir]
+  }
+
+  file { "${wal_e::env_dir}/base_backup_list.sh":
+    ensure => 'present',
+    content => "envdir ${::wal_e::env_dir} wal-e backup-list",
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
