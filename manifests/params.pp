@@ -33,6 +33,7 @@ class wal_e::params {
         'python-setuptools',
         'python-pip',
         'git',
+        'pv',
       ]
     }
     'Debian': {
@@ -44,7 +45,8 @@ class wal_e::params {
         'libpq-dev',
         'python-dev',
         'python-pip',
-        'git'
+        'git',
+        'pv'
       ]
     }
     default: {
