@@ -33,4 +33,5 @@ class wal_e::config {
       }
     }
   }
+
 }

@@ -2,7 +2,7 @@ class wal_e (
   $install_method = $wal_e::params::install_method,
   $version = $wal_e::params::version,
   $env_dir = $wal_e::params::env_dir,
-  $base_backup_disabled = $wal_e::params::base_backup_disabled,
+  $base_backup_enabled = $wal_e::params::base_backup_enabled,
   $base_backup_minute = $wal_e::params::base_backup_minute,
   $base_backup_hour = $wal_e::params::base_backup_hour,
   $base_backup_day = $wal_e::params::base_backup_day,

@@ -106,10 +106,13 @@ describe 'wal_e' do
 
         it { should contain_exec('wal_e_install_src')}
         it { should contain_vcsrepo('/etc/wal-e.d/.src')}
+
+        it { should contain_cron('wal_e_base_backup').with('ensure'=> 'absent')}
+
       end #describe
 
 
-      describe "wal_e class install from source on #{os} with swift" do
+      describe "wal_e class install from source on #{os} with swift with cron" do
         let(:params) {
           {
             :storage_type => 'swift',
@@ -120,7 +123,8 @@ describe 'wal_e' do
               'swift_user' => 'swift_user',
               'swift_password' => 'swift_pass'
             },
-            :install_method => 'source'
+            :install_method => 'source',
+            :base_backup_enabled => true,
           }
         }
         let(:facts) do
@@ -136,6 +140,8 @@ describe 'wal_e' do
 
         it { should contain_exec('wal_e_install_src')}
         it { should contain_vcsrepo('/etc/wal-e.d/.src')}
+
+        it { should contain_cron('wal_e_base_backup').with( 'ensure'=> 'present')}
       end #describe
 
     end

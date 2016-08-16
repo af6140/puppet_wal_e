@@ -4,7 +4,7 @@ class wal_e::params {
   $version = '0.9.2'
   $git_version = "v${version}"
   $env_dir = '/etc/wal-e.d'
-  $base_backup_disabled = false
+  $base_backup_enabled = false
   $base_backup_minute = 0
   $base_backup_hour = 0
   $base_backup_day = '*'
