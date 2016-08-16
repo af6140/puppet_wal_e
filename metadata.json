@@ -1,16 +1,15 @@
 {
   "name": "af6140-wal_e",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "af6140",
-  "summary": "Puppet module for postgresql wal_e",
+  "summary": "Puppet module for postgresql wal-e",
   "license": "Apache-2.0",
   "source": "https://github.com/af6140/puppet_wal_e",
   "project_page": "https://github.com/af6140/puppet_wal_e",
   "issues_url": "https://github.com/af6140/puppet_wal_e",
   "dependencies": [
     {
-      "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.3.2"
+      "name": "puppetlabs/stdlib"
     },
     {
       "name": "puppetlabs/vcsrepo"
