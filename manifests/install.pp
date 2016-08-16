@@ -52,7 +52,7 @@ class wal_e::install{
   #base backup cmd
   file { "${wal_e::env_dir}/base_backup.sh":
     ensure => 'present',
-    content => "envdir ${::wal_e::env_dir} wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}",
+    content => "envdir ${::wal_e::env_dir}/env wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}",
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
@@ -61,7 +61,7 @@ class wal_e::install{
 
   file { "${wal_e::env_dir}/base_backup_list.sh":
     ensure => 'present',
-    content => "envdir ${::wal_e::env_dir} wal-e backup-list",
+    content => "envdir ${::wal_e::env_dir}/env wal-e backup-list",
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
@@ -76,7 +76,7 @@ class wal_e::install{
   }
   cron { 'wal_e_base_backup':
     ensure => $base_cron_ensure,
-    command => "envdir ${::wal_e::env_dir} wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}",
+    command => "envdir ${::wal_e::env_dir}/env wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}",
     user => $wal_e::user,
     hour => $::wal_e::base_backup_hour,
     minute => $::wal_e::base_backup_minute,

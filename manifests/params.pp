@@ -27,7 +27,6 @@ class wal_e::params {
         'libevent-devel',
         'libxslt-devel',
         'lzop',
-        'postgresql',
         'postgresql-devel',
         'python-devel',
         'python-setuptools',

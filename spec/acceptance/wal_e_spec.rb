@@ -9,6 +9,9 @@ describe 'wale' do
            package {'postgresql-server':
             ensure => 'present'
            } ->
+           package {'cronie':
+            ensure => 'present'
+           } ->
            class {'wal_e':
              storage_type => 'aws',
              storage_configs => {
@@ -21,6 +24,9 @@ describe 'wale' do
          }
          'Debian': {
            package {'postgresql':
+            ensure => 'present'
+           } ->
+           package {'cron':
             ensure => 'present'
            } ->
            class {'wal_e':
