@@ -7,7 +7,6 @@ class wal_e::packages(
     ensure_resource('package', $os_packages, {'ensure' => 'present'})
   }
   if $pip_packages {
-
     ensure_resource('package', $pip_packages, {'ensure' => 'present', 'provider' => 'pip'})
   }
 
