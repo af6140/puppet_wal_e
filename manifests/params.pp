@@ -10,7 +10,7 @@ class wal_e::params {
   $base_backup_day = '*'
   $base_backup_month = '*'
   $base_backup_weekday = '1'
-  $base_backup_options = '--pool-size 8' #this is the default
+  $base_backup_options = '' #this is the default
 
   $user = 'postgres'
   $group = 'postgres'
