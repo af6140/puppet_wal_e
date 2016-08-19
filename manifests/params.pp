@@ -34,7 +34,6 @@ class wal_e::params {
         'git',
         'pv',
         'python-gevent',
-        'python-boto'
       ]
     }
     'Debian': {
@@ -48,8 +47,7 @@ class wal_e::params {
         'python-pip',
         'git',
         'pv',
-        'python-gevent',
-        'python-boto'
+        'python-gevent'
       ]
     }
     default: {
@@ -58,6 +56,7 @@ class wal_e::params {
   }
 
   $pips = [
+    'boto',
     'azure',
     'gcloud',
     'python-swiftclient',

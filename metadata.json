@@ -1,6 +1,6 @@
 {
   "name": "af6140-wal_e",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "af6140",
   "summary": "Puppet module for postgresql wal-e",
   "license": "Apache-2.0",
