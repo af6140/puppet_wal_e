@@ -1,5 +1,9 @@
 ## Change Log
 
+#### 0.1.6
+- enable purge old backup, maximum numbers to retain
+- change cron commnad to purge backup if enabled
+
 #### 0.1.5
 - Remove --pool-size=8 from base backup options, it's seems only effective for wal-push.
 
