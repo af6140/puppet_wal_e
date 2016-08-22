@@ -77,8 +77,8 @@ class wal_e::install{
     require => File[$::wal_e::env_dir]
   }
 
-
   #now config cron job if it is enabled
+  $cron_cmd = "envdir ${::wal_e::env_dir}/env wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}"
   if $::wal_e::base_backup_enabled {
     $base_cron_ensure = 'present'
   }else {
@@ -86,7 +86,7 @@ class wal_e::install{
   }
   cron { 'wal_e_base_backup':
     ensure => $base_cron_ensure,
-    command => "envdir ${::wal_e::env_dir}/env wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}",
+    command => $cron_cmd,
     user => $wal_e::user,
     hour => $::wal_e::base_backup_hour,
     minute => $::wal_e::base_backup_minute,

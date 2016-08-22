@@ -12,6 +12,7 @@ class wal_e::params {
   $base_backup_weekday = '1'
   $base_backup_options = '' #this is the default
   $base_backup_retain = 7
+  $base_backup_purge_enabled =false
 
   $user = 'postgres'
   $group = 'postgres'
