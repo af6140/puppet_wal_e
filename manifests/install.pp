@@ -56,7 +56,7 @@ class wal_e::install{
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
-    require => File["${wal_e::env_dir}/env"]
+    require => File[$::wal_e::env_dir]
   }
 
   file { "${wal_e::env_dir}/base_backup_list.sh":
@@ -65,7 +65,7 @@ class wal_e::install{
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
-    require => File["${wal_e::env_dir}/env"]
+    require => File[$::wal_e::env_dir]
   }
 
   file { "${wal_e::env_dir}/purge_base_backup.sh":
@@ -74,7 +74,7 @@ class wal_e::install{
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
-    require => File["${wal_e::env_dir}/env"]
+    require => File[$::wal_e::env_dir]
   }
 
 

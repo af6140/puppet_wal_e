@@ -25,6 +25,10 @@ describe 'wal_e' do
         %w(/etc/wal-e.d /etc/wal-e.d/env /etc/wal-e.d/env/AWS_ACCESS_KEY_ID /etc/wal-e.d/env/AWS_SECRET_ACCESS_KEY /etc/wal-e.d/env/WALE_S3_PREFIX /etc/wal-e.d/env/AWS_REGION).each do | env_file|
           it { should contain_file(env_file)}
         end
+
+        it { should contain_file('/etc/wal-e.d/base_backup.sh')}
+        it { should contain_file('/etc/wal-e.d/base_backup_list.sh')}
+        it { should contain_file('/etc/wal-e.d/purge_base_backup.sh')}
       end
 
       describe "wal_e class install from source on #{os}" do
