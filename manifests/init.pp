@@ -9,6 +9,8 @@ class wal_e (
   $base_backup_month = $wal_e::params::base_backup_month,
   $base_backup_weekday = $wal_e::params::base_backup_weekday,
   $base_backup_options = $wal_e::params::base_backup_options,
+  $base_backup_retain = $wal_e::params::base_backup_retain,
+  $base_backup_purge_enabled = $wal_e::params::base_backup_purge_enabled,
   $user = $wal_e::params::user,
   $group = $wal_e::params::group,
   $pip_user = $wal_e::params::pip_user,
@@ -26,6 +28,7 @@ class wal_e (
   validate_re($install_method, ['source', 'pip', 'package'])
   validate_hash($storage_configs)
   validate_absolute_path($pgdata_dir)
+  validate_integer($base_backup_retain)
 
   class {'::wal_e::install':
   } ->
