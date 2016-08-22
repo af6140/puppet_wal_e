@@ -56,7 +56,7 @@ class wal_e::install{
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
-    require => File[$wal_e::env_dir]
+    require => File["${wal_e::env_dir}/env"]
   }
 
   file { "${wal_e::env_dir}/base_backup_list.sh":
@@ -65,8 +65,18 @@ class wal_e::install{
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
-    require => File[$wal_e::env_dir]
+    require => File["${wal_e::env_dir}/env"]
   }
+
+  file { "${wal_e::env_dir}/purge_base_backup.sh":
+    ensure => 'present',
+    content => "envdir ${::wal_e::env_dir}/env wal-e delete --confirm retain ${::wal_e::base_backup_retain}",
+    mode => '0754',
+    owner => $::wal_e::user,
+    group => $::wal_e::group,
+    require => File["${wal_e::env_dir}/env"]
+  }
+
 
   #now config cron job if it is enabled
   if $::wal_e::base_backup_enabled {
