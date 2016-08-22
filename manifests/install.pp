@@ -78,7 +78,11 @@ class wal_e::install{
   }
 
   #now config cron job if it is enabled
-  $cron_cmd = "envdir ${::wal_e::env_dir}/env wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}"
+  if $wal_e::base_backup_purge_enabled {
+    $cron_cmd = "${::wal_e::env_dir}/base_backup.sh"
+  } else {
+    $cron_cmd = "${::wal_e::env_dir}/base_backup.sh && ${::wal_e::env_dir}/purge_base_backup.sh"
+  }
   if $::wal_e::base_backup_enabled {
     $base_cron_ensure = 'present'
   }else {

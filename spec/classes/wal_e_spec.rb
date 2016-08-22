@@ -12,7 +12,7 @@ describe 'wal_e' do
               'aws_secret_key' => 'dummy',
               's3_prefix' => 's3://dummy',
               'aws_region' => 'us-east-1'
-            }
+            },
           }
         }
         let(:facts) do
@@ -29,6 +29,9 @@ describe 'wal_e' do
         it { should contain_file('/etc/wal-e.d/base_backup.sh')}
         it { should contain_file('/etc/wal-e.d/base_backup_list.sh')}
         it { should contain_file('/etc/wal-e.d/purge_base_backup.sh')}
+
+        it { should contain_package('wal-e')}
+
       end
 
       describe "wal_e class install from source on #{os}" do
@@ -129,6 +132,7 @@ describe 'wal_e' do
             },
             :install_method => 'source',
             :base_backup_enabled => true,
+            :base_backup_purge_enabled => true,
           }
         }
         let(:facts) do
