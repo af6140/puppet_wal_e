@@ -1,6 +1,5 @@
 class wal_e::install{
 
-
   file {$wal_e::env_dir:
     ensure => 'directory',
     owner => $wal_e::user,
@@ -19,10 +18,14 @@ class wal_e::install{
   case $wal_e::install_method {
     'pip': {
       class {'wal_e::packages':
+        require => File[$wal_e::env_dir]
       } ->
-      package {'wal-e':
-        ensure => $wal_e::version,
-        provider => 'pip',
+      exec {'install_wall_e':
+        command => "pip install -b ${wal_e::env_dir} -q wal_e==${wal_e::version}",
+        path => ['/bin', '/usr/bin', '/sbin', '/usr/sbin', '/usr/local/bin'],
+        creates => "${wal_e::env_dir}/.installed_flag",
+        require => File[$wal_e::env_dir],
+        unless => "pip freeze |grep -q wal-e==${wal_e::version}",
       }
     }
     'source': {
