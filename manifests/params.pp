@@ -35,7 +35,6 @@ class wal_e::params {
         'python-pip',
         'git',
         'pv',
-        'python-gevent',
       ]
     }
     'Debian': {
@@ -49,7 +48,6 @@ class wal_e::params {
         'python-pip',
         'git',
         'pv',
-        'python-gevent'
       ]
     }
     default: {

@@ -7,7 +7,7 @@ class wal_e::packages(
     ensure_resource('package', $os_packages, {'ensure' => 'present'})
   }
   if $pip_packages {
-    ensure_resource('package', $pip_packages, {'ensure' => 'present', 'provider' => 'pip'})
+    ensure_resource('package', $pip_packages, {'ensure' => 'present', 'provider' => 'pip', 'install_options' => ["-b ${::wal_e::env_dir}"]})
   }
 
   if $os_packages and $pip_packages {

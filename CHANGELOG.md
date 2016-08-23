@@ -1,5 +1,9 @@
 ## Change Log
 
+#### 0.2.0
+- do not use package to install gevent, when install wal-e 0.9.2 it pulls down latest gevent 1.1.2, which need to be compiled and is broken when /tmp is mouted as noexec
+- use -b option to use wal_e::envdir as tmp dir when pip install with exec resource
+
 #### 0.1.6
 - enable purge old backup, maximum numbers to retain
 - change cron commnad to purge backup if enabled
