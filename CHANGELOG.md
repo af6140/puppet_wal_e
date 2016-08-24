@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.1
+- merge PR from smithtrevor to fix purge command logic
+
 #### 0.2.0
 - do not use package to install gevent, when install wal-e 0.9.2 it pulls down latest gevent 1.1.2, which need to be compiled and is broken when /tmp is mouted as noexec
 - use -b option to use wal_e::envdir as tmp dir when pip install with exec resource

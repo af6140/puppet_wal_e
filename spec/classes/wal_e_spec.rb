@@ -30,8 +30,6 @@ describe 'wal_e' do
         it { should contain_file('/etc/wal-e.d/base_backup_list.sh')}
         it { should contain_file('/etc/wal-e.d/purge_base_backup.sh')}
 
-        it { should contain_package('wal-e')}
-
       end
 
       describe "wal_e class install from source on #{os}" do
