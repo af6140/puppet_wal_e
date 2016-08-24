@@ -4,13 +4,13 @@ class wal_e::install{
     ensure => 'directory',
     owner => $wal_e::user,
     group => $wal_e::group,
-    mode => '0550',
+    mode => '0750',
   }->
   file {"$wal_e::env_dir/env":
     ensure => 'directory',
     owner => $wal_e::user,
     group => $wal_e::group,
-    mode => '0550',
+    mode => '0750',
     recurse => true,
     purge => true,
   }
