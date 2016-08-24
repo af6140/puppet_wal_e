@@ -1,7 +1,7 @@
 #!/bin/bash
 
-WALE_CMD="envdir <% @env_dir %>/env wal-e"
-RETAIN_DAYS=<% @base_backup_retain %>
+WALE_CMD="envdir <%= scope.lookupvar('wal_e::env_dir') %>/env wal-e"
+RETAIN_DAYS=<%= scope.lookupvar('wal_e::base_backup_retain') %>
 echo "Retaining ${RETAIN_DAYS} days base backup"
 
 #this requires gnu date

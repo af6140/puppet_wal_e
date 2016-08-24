@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.2
+- purge_base_backup.sh update, using template and retain days other than numbers of
+
 #### 0.2.1
 - merge PR from smithtrevor to fix purge command logic
 
