@@ -1,0 +1,30 @@
+#!/bin/bash
+
+WALE_CMD="envdir <%= scope.lookupvar('wal_e::env_dir') %>/env wal-e"
+RETAIN_DAYS=<%= scope.lookupvar('wal_e::base_backup_retain') %>
+echo "Retaining ${RETAIN_DAYS} days base backup"
+
+#this requires gnu date
+RETAIN_DATE=$(date --date "-${RETAIN_DAYS} day" +%Y%m%d)
+
+LAST_BASE_NAME=''
+
+#timestamp is in iso8601 format which is sortable in lexical order
+$WALE_CMD backup-list 2>/dev/null |grep "^base_" |awk '{print $1, $2}' |sort -rk2 |while read line; do
+  BASE_NAME=$(echo $line |awk '{print $1}')
+  BASE_TIME=$(echo $line |awk '{print $2}')
+  BASE_DATE=$(date --date "${BASE_TIME}" +%Y%m%d)
+  if [[ ${BASE_DATE} -lt $RETAIN_DATE ]]; then
+    echo "Last backup is ${LAST_BASE_NAME}"
+    break
+  fi
+  #remember last base name
+  LAST_BASE_NAME=BASE_NAME
+done
+
+if [[ -n $LAST_BASE_NAME ]]; then
+ echo "Deleting backup before ${LAST_BASE_NAME}"
+ #$WALE_CMD delete --confirm before ${LAST_BASE_NAME}
+else
+ echo "Nothing to be purged"
+fi

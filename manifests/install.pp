@@ -4,13 +4,13 @@ class wal_e::install{
     ensure => 'directory',
     owner => $wal_e::user,
     group => $wal_e::group,
-    mode => '0550',
+    mode => '0750',
   }->
   file {"$wal_e::env_dir/env":
     ensure => 'directory',
     owner => $wal_e::user,
     group => $wal_e::group,
-    mode => '0550',
+    mode => '0750',
     recurse => true,
     purge => true,
   }
@@ -73,7 +73,7 @@ class wal_e::install{
 
   file { "${wal_e::env_dir}/purge_base_backup.sh":
     ensure => 'present',
-    content => "envdir ${::wal_e::env_dir}/env wal-e delete --confirm retain ${::wal_e::base_backup_retain}",
+    content => template('wal_e/purge_base_backup.sh.erb'),
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,

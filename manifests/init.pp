@@ -9,7 +9,7 @@ class wal_e (
   $base_backup_month = $wal_e::params::base_backup_month,
   $base_backup_weekday = $wal_e::params::base_backup_weekday,
   $base_backup_options = $wal_e::params::base_backup_options,
-  $base_backup_retain = $wal_e::params::base_backup_retain,
+  $base_backup_retain = $wal_e::params::base_backup_retain, #days to be retained
   $base_backup_purge_enabled = $wal_e::params::base_backup_purge_enabled,
   $user = $wal_e::params::user,
   $group = $wal_e::params::group,
