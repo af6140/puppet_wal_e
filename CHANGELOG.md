@@ -1,6 +1,6 @@
 ## Change Log
 
-#### 0.2.2
+#### 0.3.0
 - purge_base_backup.sh update, using template and retain days other than numbers of
 
 #### 0.2.1
