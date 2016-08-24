@@ -1,7 +1,7 @@
 #!/bin/bash
 
-WALE_CMD="envdir <% @env_dir %> wal-e"
-RETAIN_DAYS=<% @retain_days %>
+WALE_CMD="envdir <% @env_dir %>/env wal-e"
+RETAIN_DAYS=<% @base_backup_retain %>
 echo "Retaining ${RETAIN_DAYS} days base backup"
 
 #this requires gnu date
@@ -14,7 +14,7 @@ $WALE_CMD backup-list 2>/dev/null |grep "^base_" |awk '{print $1, $2}' |sort -rk
   BASE_NAME=$(echo $line |awk '{print $1}')
   BASE_TIME=$(echo $line |awk '{print $2}')
   BASE_DATE=$(date --date "${BASE_TIME}" +%Y%m%d)
-  if [ ${BASE_DATE} -lt $RETAIN_DATE ]; then
+  if [[ ${BASE_DATE} -lt $RETAIN_DATE ]]; then
     echo "Last backup is ${LAST_BASE_NAME}"
     break
   fi
@@ -22,7 +22,7 @@ $WALE_CMD backup-list 2>/dev/null |grep "^base_" |awk '{print $1, $2}' |sort -rk
   LAST_BASE_NAME=BASE_NAME
 done
 
-if [ -n $LAST_BASE_NAME ]; then
+if [[ -n $LAST_BASE_NAME ]]; then
  echo "Deleting backup before ${LAST_BASE_NAME}"
  #$WALE_CMD delete --confirm before ${LAST_BASE_NAME}
 else
