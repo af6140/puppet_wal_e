@@ -1,5 +1,11 @@
 ## Change Log
 
+#### 0.4.0
+- change purge_base_backup.sh to actually delete old base backup
+- allow use command wrapper like sensu-wrapper to run the cron job so that it can do extra like reporting to sensu
+- separate wal_e::cron as a individual class
+- use assert_type other than validate
+
 #### 0.3.0
 - purge_base_backup.sh update, using template and retain days other than numbers of
 

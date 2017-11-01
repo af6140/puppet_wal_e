@@ -19,12 +19,12 @@ $WALE_CMD backup-list 2>/dev/null |grep "^base_" |awk '{print $1, $2}' |sort -rk
     break
   fi
   #remember last base name
-  LAST_BASE_NAME=BASE_NAME
+  LAST_BASE_NAME=${BASE_NAME}
 done
 
 if [[ -n $LAST_BASE_NAME ]]; then
  echo "Deleting backup before ${LAST_BASE_NAME}"
- #$WALE_CMD delete --confirm before ${LAST_BASE_NAME}
+ $WALE_CMD delete --confirm before ${LAST_BASE_NAME}
 else
  echo "Nothing to be purged"
 fi

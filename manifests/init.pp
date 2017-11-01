@@ -18,17 +18,22 @@ class wal_e (
   $packages = $wal_e::params::packages,
   $pips = $wal_e::params::pips,
   $storage_type = $wal_e::params::storage_type,
-  $storage_configs = undef
+  $storage_configs = undef,
+  $cron_wrapper = undef,
+  $purge_cron_wrapper = undef,
+  $purge_cron_delay_minutes = 30,
 ) inherits wal_e::params {
 
   validate_absolute_path($env_dir)
-  validate_string($storage_type)
-  validate_re($storage_type, ['aws','google','azure','swift'])
-  validate_string($install_method)
-  validate_re($install_method, ['source', 'pip', 'package'])
-  validate_hash($storage_configs)
+  assert_type(Optional[Enum['aws','google','azure','swift']], $storage_type)
+  assert_type(String, $install_method)
+  assert_type(Enum['source', 'pip', 'package'], $install_method, )
+  assert_type(Hash, $storage_configs)
   validate_absolute_path($pgdata_dir)
-  validate_integer($base_backup_retain)
+  assert_type(Integer[1],$base_backup_retain)
+  assert_type(Integer[1],$purge_cron_delay_minutes)
+  assert_type(Boolean, $base_backup_enabled)
+  assert_type(Boolean, $base_backup_purge_enabled)
 
   class {'::wal_e::install':
   } ->

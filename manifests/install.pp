@@ -52,10 +52,20 @@ class wal_e::install{
     }
   }
 
+  $base_backup_cmd = @("END")
+  #!/bin/bash
+  envdir ${::wal_e::env_dir}/env wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}
+  END
+
+  $base_backup_list_cmd = @("END")
+  #!/bin/bash
+  envdir ${::wal_e::env_dir}/env wal-e backup-list
+  END
+
   #base backup cmd
   file { "${wal_e::env_dir}/base_backup.sh":
     ensure => 'present',
-    content => "envdir ${::wal_e::env_dir}/env wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}",
+    content => $base_backup_cmd,
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
@@ -64,7 +74,7 @@ class wal_e::install{
 
   file { "${wal_e::env_dir}/base_backup_list.sh":
     ensure => 'present',
-    content => "envdir ${::wal_e::env_dir}/env wal-e backup-list",
+    content => $base_backup_list_cmd,
     mode => '0754',
     owner => $::wal_e::user,
     group => $::wal_e::group,
@@ -78,28 +88,6 @@ class wal_e::install{
     owner => $::wal_e::user,
     group => $::wal_e::group,
     require => File[$::wal_e::env_dir]
-  }
-
-  #now config cron job if it is enabled
-  if $wal_e::base_backup_purge_enabled {
-    $cron_cmd = "${::wal_e::env_dir}/base_backup.sh && ${::wal_e::env_dir}/purge_base_backup.sh"
-  } else {
-    $cron_cmd = "${::wal_e::env_dir}/base_backup.sh"
-  }
-  if $::wal_e::base_backup_enabled {
-    $base_cron_ensure = 'present'
-  }else {
-    $base_cron_ensure = 'absent'
-  }
-  cron { 'wal_e_base_backup':
-    ensure => $base_cron_ensure,
-    command => $cron_cmd,
-    user => $wal_e::user,
-    hour => $::wal_e::base_backup_hour,
-    minute => $::wal_e::base_backup_minute,
-    monthday => $::wal_e::base_backup_day,
-    month => $::wal_e::base_backup_month,
-    weekday => $::wal_e::base_backup_weekday
   }
 
 }
