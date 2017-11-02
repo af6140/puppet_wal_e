@@ -1,6 +1,6 @@
 {
   "name": "af6140-wal_e",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "af6140",
   "summary": "Puppet module for postgresql wal-e",
   "license": "Apache-2.0",
@@ -13,6 +13,9 @@
     },
     {
       "name": "puppetlabs/vcsrepo"
+    },
+    {
+      "name": "rmueller/cron"
     }
   ],
   "operatingsystem_support": [
