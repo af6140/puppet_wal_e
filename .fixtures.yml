@@ -4,5 +4,8 @@ fixtures:
       repo: "puppetlabs/stdlib"
     vcsrepo:
       repo: "puppetlabs/vcsrepo"
+    cron:
+      repo: "rmueller/cron"
+      ref: "0.2.1"
   symlinks:
     wal_e: "#{source_dir}"

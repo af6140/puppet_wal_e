@@ -112,7 +112,7 @@ describe 'wal_e' do
         it { should contain_exec('wal_e_install_src')}
         it { should contain_vcsrepo('/etc/wal-e.d/.src')}
 
-        it { should contain_cron('wal_e_base_backup').with('ensure'=> 'absent')}
+        it { should contain_cron__job('wal_e_base_backup').with('ensure'=> 'absent')}
 
       end #describe
 
@@ -131,6 +131,8 @@ describe 'wal_e' do
             :install_method => 'source',
             :base_backup_enabled => true,
             :base_backup_purge_enabled => true,
+            :cron_wrapper => '/usr/bin/sensu-wrapper -N "wal_e_backup"',
+            :purge_cron_wrapper => '/usr/bin/sensu-wrapper -N "wal_e_backup_purge"',
           }
         }
         let(:facts) do
@@ -147,7 +149,16 @@ describe 'wal_e' do
         it { should contain_exec('wal_e_install_src')}
         it { should contain_vcsrepo('/etc/wal-e.d/.src')}
 
-        it { should contain_cron('wal_e_base_backup').with( 'ensure'=> 'present')}
+        it { should contain_cron__job('wal_e_base_backup').with( 'ensure'=> 'present')
+          .with_command('/usr/bin/sensu-wrapper -N "wal_e_backup" /etc/wal-e.d/base_backup.sh')
+          .with_minute(0)
+        }
+
+        it { should contain_cron__job('wal_e_base_backup_purge').with( 'ensure'=> 'present')
+          .with_command('/usr/bin/sensu-wrapper -N "wal_e_backup_purge" /etc/wal-e.d/purge_base_backup.sh')
+          .with_minute(30)
+        }
+
       end #describe
 
     end
