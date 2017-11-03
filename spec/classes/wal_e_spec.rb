@@ -159,6 +159,8 @@ describe 'wal_e' do
           .with_minute(30)
         }
 
+        it {should contain_file('/etc/wal-e.d/base_backup.sh').with_content(/^#!\/bin\/bash$/)}
+
       end #describe
 
     end
