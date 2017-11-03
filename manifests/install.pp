@@ -55,12 +55,12 @@ class wal_e::install{
   $base_backup_cmd = @("END")
   #!/bin/bash
   envdir ${::wal_e::env_dir}/env wal-e backup-push ${::wal_e::base_backup_options} ${::wal_e::pgdata_dir}
-  END
+  | END
 
   $base_backup_list_cmd = @("END")
   #!/bin/bash
   envdir ${::wal_e::env_dir}/env wal-e backup-list
-  END
+  | END
 
   #base backup cmd
   file { "${wal_e::env_dir}/base_backup.sh":

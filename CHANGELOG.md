@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.4.1
+- Urgent fix: fix script indent
+
 #### 0.4.0
 - change purge_base_backup.sh to actually delete old base backup
 - allow use command wrapper like sensu-wrapper to run the cron job so that it can do extra like reporting to sensu
