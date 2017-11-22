@@ -32,7 +32,7 @@ class wal_e::params {
         'postgresql-devel',
         'python-devel',
         'python-setuptools',
-        'python-pip',
+        'python2-pip',
         'git',
         'pv',
       ]

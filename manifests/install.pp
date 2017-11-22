@@ -20,6 +20,12 @@ class wal_e::install{
       class {'wal_e::packages':
         require => File[$wal_e::env_dir]
       } ->
+      exec {'install_azure_v1.x':
+        command => "pip install -b ${wal_e::env_dir} -q azure==1.0.3",
+        path => ['/bin', '/usr/bin', '/sbin', '/usr/sbin', '/usr/local/bin'],
+        require => File[$wal_e::env_dir],
+        unless => "pip freeze |grep -q azure",
+      }->
       exec {'install_wall_e':
         command => "pip install -b ${wal_e::env_dir} -q wal_e==${wal_e::version}",
         path => ['/bin', '/usr/bin', '/sbin', '/usr/sbin', '/usr/local/bin'],

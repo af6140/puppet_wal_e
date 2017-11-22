@@ -1,5 +1,9 @@
 ## Change Log
 
+#### 0.4.2
+- use python2-pip package, since it is obsoleted by python2-pip package on redhat platform
+- install azure 1.0.3 as dependency to avoid error
+
 #### 0.4.1
 - Urgent fix: fix script indent
 
